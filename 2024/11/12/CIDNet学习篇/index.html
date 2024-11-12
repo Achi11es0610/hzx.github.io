@@ -66,8 +66,8 @@
 </li>
 <li><p><strong>HSV不够好</strong>。首先HSV由色调（H），饱和度（S），亮度（V）组成，它把颜色和亮度分开了，这肯定比sRGB更好处理图像（实际上也是通过sRGB计算来的），但是作者说由于H不连续的属性（例如RGB <em>255 0 0</em> 对应的H为0，而<em>255 0 1</em>对应的H接近360，他们实际上是非常相近的，然而H却是两个极端，产生这种结果的原因可见下面的<em>由HSV到sRGB的计算过程</em>）以及HSV与sRGB之间复杂的映射关系（具体是指从HSV转回sRGB的时候如果存在亮度V&#x3D;0的地方，不管H和S是什么，对应的RGB都是<em>0 0 0</em>，这样就会导致色调和饱和度信息丢失了，也就是论文里面说的<em>multi-mapping of pure black planes</em>，产生这种结果的原因可见下面的<em>由sRGB到HSV的计算过程</em>）导致其难以处理复杂和变化的光照条件，这也解释了为什么在极低的光照条件下用HSV增强的图像通常也会出现黑色伪影</p>
 <center class="half">
-<style>.bocxmltqndsh{zoom:50%;}</style><img src="/2024/11/12/CIDNet%E5%AD%A6%E4%B9%A0%E7%AF%87/image-20241112181314278.png" class="bocxmltqndsh" alt="由HSV到sRGB的计算过程">
-<style>.xxuwtlbhsfch{zoom: 50%;}</style><img src="/2024/11/12/CIDNet%E5%AD%A6%E4%B9%A0%E7%AF%87/Snipaste_2024-11-12_18-20-00.png" class="xxuwtlbhsfch" alt="由sRGB到HSV的计算过程">
+<style>.feumfecjzzzp{zoom:50%;}</style><img src="/2024/11/12/CIDNet%E5%AD%A6%E4%B9%A0%E7%AF%87/image-20241112181314278.png" class="feumfecjzzzp" alt="由HSV到sRGB的计算过程">
+<style>.uhmvwvzzofvq{zoom: 50%;}</style><img src="/2024/11/12/CIDNet%E5%AD%A6%E4%B9%A0%E7%AF%87/Snipaste_2024-11-12_18-20-00.png" class="uhmvwvzzofvq" alt="由sRGB到HSV的计算过程">
 </center></li>
 </ul>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
@@ -88,9 +88,10 @@
 
 <p>最后的小h和小v分别是cos(2πPr)跟sin(2πPr)，观察上面的H^跟V^，他们前面的三个乘数都一样，只有后面这两不一样，所以从大体意思上理解前面三个乘数是融合并改进了原先HSV中的颜色信息生成了新的颜色信息，然后最后的小h跟小v就是把新的颜色信息映射到了水平轴（Horizontal）跟垂直轴（Vertical）上，从而形成了HVI中的H跟V</p>
 </li>
-<li><p>**CIDNet（Color and Intensity Decoupling Network） **：基于HVI的双路增强</p>
+<li><p><strong>CIDNet（Color and Intensity Decoupling Network）</strong>：基于HVI的双路增强</p>
 </li>
 </ul>
+<p>​	还没写完</p>
 
         </article>
         <section class="post-near">
